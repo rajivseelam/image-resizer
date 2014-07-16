@@ -21,7 +21,7 @@ class PhotoController extends BaseController {
 	 **/
 	public function store()
 	{
-		Image::canvas(140,140,'#f7f7f7')->save(public_path().'/uploads/back.png');
+		//Image::canvas(140,140,'#f7f7f7')->save(public_path().'/uploads/back.png');
 
 		$rules = array(
 				'photo' => 'required|image',
@@ -69,8 +69,8 @@ class PhotoController extends BaseController {
 
 		}
 
-		Image::make(public_path().'/uploads/back.png')
-			->insert($dest,'center')->save($dest);
+		// Image::make(public_path().'/uploads/back.png')
+		// 	->insert($dest,'center')->save($dest);
 
 		if($mime == 'image/jpeg')
 		{
