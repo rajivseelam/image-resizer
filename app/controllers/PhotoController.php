@@ -119,6 +119,8 @@ class PhotoController extends BaseController {
 		//dd(Input::all());
 
 		$imagePath = 'uploads/'.time().'.png';
+		$imagePath = 'uploads/'.time().'.jpg';
+
 		$dest = public_path().'/'.$imagePath;
 
 		$parts = explode(',', Input::get('image-data'));
@@ -129,19 +131,25 @@ class PhotoController extends BaseController {
 
 		File::put($dest,$image);
 
-		$image = imagecreatefrompng($dest);
-
-		$imagePath = 'uploads/'.time().'.jpg';
-
-		$dest = public_path().'/'.$imagePath;
-
-	    imagejpeg($image, $dest, 80);
-
-	    imagedestroy($image);	
-
 		$cmd = 'jpegoptim --strip-all '.$dest;
 
 		$result = exec($cmd);
+
+		// die;
+
+		// $image = imagecreatefrompng($dest);
+
+		// $imagePath = 'uploads/'.time().'.jpg';
+
+		// $dest = public_path().'/'.$imagePath;
+
+	 //    imagejpeg($image, $dest, 80);
+
+	 //    imagedestroy($image);	
+
+		// $cmd = 'jpegoptim --strip-all '.$dest;
+
+		// $result = exec($cmd);
 
 		return Redirect::to($imagePath);
 	}

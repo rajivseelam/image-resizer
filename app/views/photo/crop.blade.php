@@ -99,7 +99,7 @@
 
         $('form').submit(function() {
           // Move cropped image data to hidden input
-          var imageData = $('.image-editor').cropit('export');
+          var imageData = $('.image-editor').cropit('export',{type: 'image/jpeg'});
           $('.hidden-image-data').val(imageData);
 
           // Print HTTP request params
