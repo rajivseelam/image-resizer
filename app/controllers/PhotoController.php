@@ -96,4 +96,54 @@ class PhotoController extends BaseController {
         return Response::download($dest, $filename, $headers);
 	}
 
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	public function crop()
+	{
+		return View::make('photo.crop');
+	}
+
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	public function cropStore()
+	{
+		//dd(Input::all());
+
+		$imagePath = 'uploads/'.time().'.png';
+		$dest = public_path().'/'.$imagePath;
+
+		$parts = explode(',', Input::get('image-data'));
+
+		$image = base64_decode($parts[1]);
+
+		//dd($parts[0]);
+
+		File::put($dest,$image);
+
+		$image = imagecreatefrompng($dest);
+
+		$imagePath = 'uploads/'.time().'.jpg';
+
+		$dest = public_path().'/'.$imagePath;
+
+	    imagejpeg($image, $dest, 80);
+
+	    imagedestroy($image);	
+
+		$cmd = 'jpegoptim --strip-all '.$dest;
+
+		$result = exec($cmd);
+
+		return Redirect::to($imagePath);
+	}
+
 }

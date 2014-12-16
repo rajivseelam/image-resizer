@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/', function()
-{
-	return Redirect::to('create');
-});
+// Route::get('/', function()
+// {
+// 	return Redirect::to('create');
+// });
+
+Route::get('crop','PhotoController@crop');
+Route::post('crop','PhotoController@cropStore');
 
 Route::get('create','PhotoController@create');
 Route::post('create','PhotoController@store');
+
+
+
